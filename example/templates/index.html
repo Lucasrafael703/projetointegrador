@@ -1,13 +1,35 @@
-<!DOCTYPE html>
 {% load static %}
-<html lang="pt">
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-   <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="{% static 'example/css/index.css' %}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Doação</title>
+    <link rel="stylesheet" href="{% static 'Index/css/styles.css' %}">
 </head>
 <body>
-<p class="main-text">olá mundo</p>
+    <header>
+        <div class="container">
+            <h1>Campanha de Arrecadação de vestuário</h1>
+            <a href="{% url 'admin:index' %}"><button class="btn-login">Login</button></a>
+        </div>
+    </header>
 
+    <div class="container">
+        <section class="donation-info">
+            <h2><span>{{ soma_quantidade }}</span></h2>
+            <p>Essa é quantidade de roupas doadas até o momento</p>
+            <p>Para contribuir você pode ir até um de nossos pontos de coleta</p>
+            <p>Para saber mais clique em doar </p>
+            <a href="{% url 'pontos' %}"><button class="btn-donate">Doar</button></a>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>DRP04-PJI110-SALA-002GRUPO-011</p>
+        </div>
+    </footer>
 </body>
 </html>
