@@ -34,10 +34,20 @@ class Vestuario(Base):
 
     class Meta:
         verbose_name = 'Vestuario'
-        verbose_name_plural = 'vestuarios'
+        verbose_name_plural = 'Vestuarios'
 
     def __str__(self):
         return self.roupa
+
+class Eletrodomestico(Base):
+    eletro = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'Eletrodomestico'
+        verbose_name_plural = 'Eletrodomesticos'
+
+    def __str__(self):
+        return self.eletro
 
 
 
@@ -74,6 +84,17 @@ class Arrecadacao(Base):
 
     def __str__(self):
         return f'O arrecadador {self.arrecadador} arrecadou {self.quantidade} peças de {self.vestuario}'
+
+class Arrecadacao_eletrodomestico(Base):
+    eletrodomestico = models.ForeignKey(Eletrodomestico, related_name='eletrodomestico', on_delete=models.CASCADE)
+    quantidade = models.IntegerField(validators=[MaxValueValidator(999)])
+
+    class Meta:
+        verbose_name = 'Arrecadação_eletrodomestico'
+        verbose_name_plural = 'Arrecadações_eletrodomesticos'
+
+    def __str__(self):
+        return f'Foram arrecadados {self.quantidade} peças de {self.eletrodomestico}'
 
 
 @receiver(pre_save, sender=Arrecadador)
