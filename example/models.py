@@ -106,3 +106,26 @@ def preencher_endereco_por_cep(sender, instance, **kwargs):
     # Atualiza os campos de bairro e cidade com os dados obtidos
     instance.bairro = data.get('bairro', '')
     instance.cidade = data.get('localidade', '')
+
+class Alimento(Base):  # Herda da classe Base
+    nome = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = 'Alimento'
+        verbose_name_plural = 'Alimentos'
+
+    def __str__(self):
+        return self.nome
+
+
+
+class Arrecadacao_alimento(Base):
+    alimento = models.ForeignKey(Alimento, related_name='arrecadacao_alimento', on_delete=models.CASCADE)
+    quantidade = models.IntegerField(validators=[MaxValueValidator(999)])
+
+    class Meta:
+        verbose_name = 'Arrecadação Alimento'
+        verbose_name_plural = 'Arrecadações Alimentos'
+
+    def __str__(self):
+        return f'Foram arrecadados {self.quantidade} unidades de {self.alimento}'
