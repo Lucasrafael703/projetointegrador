@@ -53,6 +53,13 @@
                         <option value="{{ genero.id }}">{{ genero }}</option>
                     {% endfor %}
                 </select>
+
+                <label for="arrecadador">Arrecadador:</label>
+                <select name="arrecadador_id" id="arrecadador" required>
+                {% for arrecadador in arrecadores %}
+                <option value="{{ arrecadador.id }}">{{ arrecadador.nome }}</option>
+                {% endfor %}
+                </select>
             </div>
 
             <!-- Campos para Eletrodoméstico -->
