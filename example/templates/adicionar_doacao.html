@@ -13,7 +13,6 @@
         <h1>Adicionar Doação</h1>
     </header>
     <main>
-
         <form action="{% url 'adicionar_doacao' %}" method="POST" id="doacaoForm">
             {% csrf_token %}
             <label for="tipo">Tipo de Doação:</label>
@@ -32,15 +31,6 @@
                         <option value="{{ vestuario.id }}">{{ vestuario }}</option>
                     {% endfor %}
                 </select>
-
-                <label for="arrecadador">Arrecadador:</label>
-                <select name="arrecadador_id" id="arrecadador" required>
-                    <option value="">Selecione um arrecadador...</option>
-                    {% for arrecadador in arrecadores %}
-                        <option value="{{ arrecadador.id }}">{{ arrecadador.nome }}</option>
-                    {% endfor %}
-                </select>
-
                 <label for="tamanho">Tamanho:</label>
                 <select name="tamanho" id="tamanho">
                     {% for tamanho in tamanhos %}
@@ -52,13 +42,6 @@
                     {% for genero in generos %}
                         <option value="{{ genero.id }}">{{ genero }}</option>
                     {% endfor %}
-                </select>
-
-                <label for="arrecadador">Arrecadador:</label>
-                <select name="arrecadador_id" id="arrecadador" required>
-                {% for arrecadador in arrecadores %}
-                <option value="{{ arrecadador.id }}">{{ arrecadador.nome }}</option>
-                {% endfor %}
                 </select>
             </div>
 
