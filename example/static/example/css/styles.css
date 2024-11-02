@@ -1,123 +1,167 @@
+/* Estilo geral */
 html {
     background-color: #fff;
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Mudança para uma fonte mais moderna */
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Para ocupar pelo menos toda a altura da viewport */
+    min-height: 100vh;
+    color: #333;
 }
 
+/* Container */
 .container {
     display: flex;
-    justify-content: space-between; /* Para distribuir o espaço entre os elementos */
+    justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
+/* Cabeçalho */
 header {
-    background-color: #85c394;
+    background-color: #e63946; /* Tom de vermelho */
     color: white;
     padding: 20px 0;
+    text-align: center;
 }
 
 header h1 {
     margin: 0;
+    font-size: 2.5em; /* Tamanho maior */
 }
 
-.btn-login {
-    background-color: #28a745;
-    color: #fff;
+/* Botões */
+.btn-login, .btn-donate, .btn-register {
+    background-color: #f1faee; /* Cor de fundo claro para contraste */
+    color: #e63946; /* Tom de vermelho */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-login:hover {
-    background-color: #218838;
+.btn-login:hover, .btn-donate:hover, .btn-register:hover {
+    background-color: #f1faee;
+    color: #a8dadc; /* Tom de azul claro ao passar o mouse */
 }
 
+/* Container Horizontal */
 .horizontal-container {
-    display: flex; /* Alinha as seções horizontalmente */
-    justify-content: space-around; /* Distribui espaço uniforme entre as seções */
-    width: 80%; /* Largura do contêiner */
-    margin: 50px auto; /* Centraliza o contêiner e adiciona margem */
-    float: right;
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: 50px auto;
+    flex-wrap: wrap; /* Permite que as seções se movam para a linha seguinte em telas pequenas */
 }
 
+/* Seções de Doação */
 .donation-info {
-    flex: 1; /* Faz com que cada seção ocupe o mesmo espaço */
-    margin: 10px; /* Adiciona margem entre as seções */
+    flex: 1 1 300px; /* Flexibilidade e largura mínima */
+    margin: 10px;
     padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e63946; /* Borda em vermelho */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    box-sizing: border-box; /* Inclui o padding e a borda na largura total */
-}
-
-.donation-info p {
-    font-size: 18px;
+    border-radius: 10px; /* Cantos arredondados */
+    background-color: #f1faee; /* Fundo claro para contraste */
 }
 
 .donation-info h2 {
-    font-size: 100px; /* Tamanho ajustado */
-    color: black;
-    margin: 20px 0; /* Margens superior e inferior */
+    font-size: 4em; /* Tamanho do texto ajustado */
+    color: #e63946; /* Tom de vermelho */
+    margin: 20px 0;
 }
 
-.btn-donate {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    margin-top: 10px; /* Margem acima do botão */
+.donation-info p {
+    font-size: 1.2em; /* Tamanho do texto ajustado */
 }
 
-.btn-donate:hover {
-    background-color: #218838;
-}
-
-.btn-register {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
-    margin-top: 10px; /* Margem acima do botão */
-}
-
-.btn-register:hover {
-    background-color: #218838;
-}
-
+/* Rodapé */
 footer {
     background-color: #f8f9fa;
     padding: 20px 0;
     text-align: center;
-    margin-top: auto; /* Isso empurra o footer para o final da página */
+    margin-top: auto;
 }
 
 footer p {
     margin: 0;
 }
 
+/* Estilos de formulário */
 .form-container {
-    width: 60%; /* Largura de 60% da tela */
-    margin: 0 auto; /* Centraliza o contêiner */
-    padding: 20px; /* Adiciona espaço interno */
-    border: 1px solid #ccc; /* Borda ao redor do contêiner */
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
-    background-color: #fff; /* Fundo branco */
-    border-radius: 8px; /* Bordas arredondadas */
+    width: 90%;
+    max-width: 600px; /* Largura máxima para o formulário */
+    margin: 20px auto; /* Margem para centralizar */
+    padding: 20px;
+    border: 1px solid #e63946; /* Borda em vermelho */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
 }
 
+input, select {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: calc(100% - 22px); /* Ajusta a largura considerando padding e borda */
+    font-size: 1em;
+}
+
+input:focus, select:focus {
+    border-color: #e63946; /* Borda vermelha no foco */
+}
+
+[type="submit"] {
+    background-color: #e63946; /* Botão vermelho */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+[type="submit"]:hover {
+    background-color: #d62839; /* Tom de vermelho mais escuro ao passar o mouse */
+}
+
+/* Popup */
+#popup {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em; /* Ajusta o tamanho do cabeçalho para telas pequenas */
+    }
+
+    .donation-info h2 {
+        font-size: 3em; /* Ajusta o tamanho do texto para telas pequenas */
+    }
+}
