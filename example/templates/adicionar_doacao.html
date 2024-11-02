@@ -13,7 +13,7 @@
         <h1>Adicionar Doação</h1>
     </header>
     <main>
-        <form action="{% url 'adicionar_doacao' %}" method="POST">
+        <form action="{% url 'adicionar_doacao' %}" method="POST" id="doacaoForm">
             {% csrf_token %}
             <label for="tipo">Tipo de Doação:</label>
             <select name="tipo" id="tipo" required onchange="toggleFields()">
@@ -31,14 +31,12 @@
                         <option value="{{ vestuario.id }}">{{ vestuario }}</option>
                     {% endfor %}
                 </select>
-
                 <label for="tamanho">Tamanho:</label>
                 <select name="tamanho" id="tamanho">
                     {% for tamanho in tamanhos %}
                         <option value="{{ tamanho.id }}">{{ tamanho }}</option>
                     {% endfor %}
                 </select>
-
                 <label for="genero">Gênero:</label>
                 <select name="genero" id="genero">
                     {% for genero in generos %}
@@ -72,6 +70,16 @@
 
             <button type="submit">Adicionar Doação</button>
         </form>
+
+        <!-- Pop-up para confirmação de doação -->
+        {% if doacao_realizada %}
+        <div id="popup" style="display:block;">
+            <div class="popup-content">
+                <p>Obrigado! Você doou <strong>{{ quantidade }}</strong> itens.</p>
+                <button onclick="window.location.href='{% url 'index' %}'">Voltar</button>
+            </div>
+        </div>
+        {% endif %}
     </main>
     <script>
         function toggleFields() {
@@ -87,6 +95,11 @@
             } else if (tipo === 'alimento') {
                 document.getElementById('alimentoFields').style.display = 'block';
             }
+        }
+
+        // Função para redirecionar para index.html
+        function voltarParaIndex() {
+            window.location.href = "{% url 'index' %}";
         }
     </script>
 </body>

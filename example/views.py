@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from .models import Arrecadacao, Arrecadacao_eletrodomestico, Arrecadacao_alimento, Vestuario, Eletrodomestico, Alimento, Tamanho, Genero, Arrecadador
 
 def adicionar_doacao(request):
+    quantidade = 0
     if request.method == 'POST':
         tipo = request.POST.get('tipo')
         quantidade = int(request.POST.get('quantidade', 0))
@@ -15,18 +16,14 @@ def adicionar_doacao(request):
             vestuario_id = request.POST.get('vestuario')
             tamanho_id = request.POST.get('tamanho')
             genero_id = request.POST.get('genero')
-            arrecadador_id = request.POST.get('arrecadador')
             vestuario = Vestuario.objects.get(id=vestuario_id)
             tamanho = Tamanho.objects.get(id=tamanho_id)
             genero = Genero.objects.get(id=genero_id)
-            arrecadador = Arrecadador.objects.get(id=arrecadador_id)
-
             Arrecadacao.objects.create(
                 vestuario=vestuario,
                 tamanho=tamanho,
                 genero=genero,
                 quantidade=quantidade,
-                arrecadador=arrecadador
             )
 
         elif tipo == 'eletrodomestico':
@@ -39,7 +36,8 @@ def adicionar_doacao(request):
             alimento = Alimento.objects.get(id=alimento_id)
             Arrecadacao_alimento.objects.create(alimento=alimento, quantidade=quantidade)
 
-        return redirect('index')
+        # Retorna a quantidade como contexto para o JavaScript manipular
+        return render(request, 'adicionar_doacao.html', {'quantidade': quantidade, 'doacao_realizada': True})
 
     context = {
         'vestuarios': Vestuario.objects.all(),
@@ -47,7 +45,6 @@ def adicionar_doacao(request):
         'generos': Genero.objects.all(),
         'eletrodomesticos': Eletrodomestico.objects.all(),
         'alimentos': Alimento.objects.all(),
-        'arrecadadores': Arrecadador.objects.all()
     }
     return render(request, 'adicionar_doacao.html', context)
 
@@ -63,10 +60,6 @@ def soma_quantidade_eletrodomestico(request):
     context = {'soma_quantidade_eletrodomestico': soma}
     return render(request, 'index.html', context)
 
-
-
-def pontos(request):
-    return render(request, "pontos.html")
 
 
 def index(request):
@@ -86,4 +79,12 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
+def cadastrar_arrecadador(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        cep = request.POST.get('cep')
+        bairro = request.POST.get('bairro')
+        cidade = request.POST.get('cidade')
+        Arrecadador.objects.create(nome=nome, cep=cep, bairro=bairro, cidade=cidade)
+        return redirect('index')  # Redireciona para a página inicial após o cadastro
+    return render(request, 'adicionar_arrecadador.html')
