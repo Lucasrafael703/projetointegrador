@@ -30,7 +30,7 @@ class EletrodomesticoAdmin(admin.ModelAdmin):
 
 @admin.register(Arrecadacao)
 class ArecadacaoAdmin(admin.ModelAdmin):
-    list_display = ('arrecadador', 'vestuario', 'tamanho', 'genero', 'quantidade', 'atualizacao', 'ativo')
+    list_display = ( 'vestuario', 'tamanho', 'genero', 'quantidade', 'atualizacao', 'ativo')
 
 
 @admin.register(Arrecadacao_eletrodomestico)

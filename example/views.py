@@ -11,15 +11,16 @@ def adicionar_doacao(request):
     if request.method == 'POST':
         tipo = request.POST.get('tipo')
         quantidade = int(request.POST.get('quantidade', 0))
-        arrecadador_id = request.POST.get('arrecadador_id')  # Capturando o ID do arrecadador
 
         if tipo == 'vestuario':
             vestuario_id = request.POST.get('vestuario')
             tamanho_id = request.POST.get('tamanho')
             genero_id = request.POST.get('genero')
+
             vestuario = Vestuario.objects.get(id=vestuario_id)
             tamanho = Tamanho.objects.get(id=tamanho_id)
             genero = Genero.objects.get(id=genero_id)
+
 
             # Criação da doação incluindo o arrecadador
             Arrecadacao.objects.create(
@@ -27,8 +28,8 @@ def adicionar_doacao(request):
                 tamanho=tamanho,
                 genero=genero,
                 quantidade=quantidade,
-                arrecadador_id=arrecadador_id  # Adicionando o arrecadador
             )
+
 
         elif tipo == 'eletrodomestico':
             eletro_id = request.POST.get('eletrodomestico')
@@ -49,10 +50,8 @@ def adicionar_doacao(request):
         'generos': Genero.objects.all(),
         'eletrodomesticos': Eletrodomestico.objects.all(),
         'alimentos': Alimento.objects.all(),
-        'arrecadores': Arrecadador.objects.all(),  # Adicione isso
     }
     return render(request, 'adicionar_doacao.html', context)
-
 
 def soma_quantidade_arrecadacao(request):
     # Calcula a soma da quantidade de arrecadação

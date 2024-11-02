@@ -72,7 +72,6 @@ class Genero(Base):
         return self.gender
 
 class Arrecadacao(Base):
-    arrecadador = models.ForeignKey(Arrecadador, related_name='arrecadacoes', on_delete=models.CASCADE)
     vestuario = models.ForeignKey(Vestuario, related_name='arrecadacoes', on_delete=models.CASCADE)
     tamanho = models.ForeignKey(Tamanho, related_name='tamanhos', on_delete=models.CASCADE)
     genero = models.ForeignKey(Genero, related_name='generos', on_delete=models.CASCADE)
