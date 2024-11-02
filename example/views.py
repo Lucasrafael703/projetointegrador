@@ -70,21 +70,20 @@ def pontos(request):
 
 
 def index(request):
-    # Soma de roupas
-    soma_arrecadacao = Arrecadacao.objects.aggregate(soma_quantidade=Sum('quantidade'))['soma_quantidade'] or 0
-    # Soma de eletrodomésticos
-    soma_eletrodomestico = \
-    Arrecadacao_eletrodomestico.objects.aggregate(soma_quantidade_eletrodomestico=Sum('quantidade'))[
-        'soma_quantidade_eletrodomestico'] or 0
-    # Soma de alimentos
-    soma_alimento = Arrecadacao_alimento.objects.aggregate(soma_quantidade_alimento=Sum('quantidade'))[
-                        'soma_quantidade_alimento'] or 0
+    # Soma das quantidades de vestuário
+    soma_quantidade = Arrecadacao.objects.aggregate(total=Sum('quantidade'))['total'] or 0
+
+    # Soma das quantidades de eletrodomésticos
+    soma_quantidade_eletrodomestico = Arrecadacao_eletrodomestico.objects.aggregate(total=Sum('quantidade'))['total'] or 0
+
+    # Soma das quantidades de alimentos
+    soma_quantidade_alimento = Arrecadacao_alimento.objects.aggregate(total=Sum('quantidade'))['total'] or 0
 
     context = {
-        'soma_quantidade': soma_arrecadacao,
-        'soma_quantidade_eletrodomestico': soma_eletrodomestico,
-        'soma_quantidade_alimento': soma_alimento,
+        'soma_quantidade': soma_quantidade,
+        'soma_quantidade_eletrodomestico': soma_quantidade_eletrodomestico,
+        'soma_quantidade_alimento': soma_quantidade_alimento,
     }
-
     return render(request, 'index.html', context)
+
 

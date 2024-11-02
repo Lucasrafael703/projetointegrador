@@ -6,9 +6,9 @@ from django.dispatch import receiver
 
 
 class Base(models.Model):
-    criacao = models.DateTimeField(auto_created=True)
-    atualizacao = models.DateTimeField(auto_now=True)
-    ativo = models.BooleanField(default=True)
+    criacao = models.DateTimeField(auto_now=True)  # Define a data e hora atuais na criação
+    atualizacao = models.DateTimeField(auto_now=True)  # Atualiza a data e hora atuais a cada modificação
+    ativo = models.BooleanField(default=True)  # Valor padrão para ativo
 
     class Meta:
         abstract = True
