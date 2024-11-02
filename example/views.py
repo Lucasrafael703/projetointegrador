@@ -1,9 +1,6 @@
-# example/views.py
 from datetime import datetime
-
-from django.shortcuts import render
-from django.db.models import Sum
 from django.shortcuts import render, redirect
+from django.db.models import Sum
 from .models import Arrecadacao, Arrecadacao_eletrodomestico, Arrecadacao_alimento, Vestuario, Eletrodomestico, Alimento, Tamanho, Genero, Arrecadador
 
 def adicionar_doacao(request):
@@ -16,14 +13,18 @@ def adicionar_doacao(request):
             vestuario_id = request.POST.get('vestuario')
             tamanho_id = request.POST.get('tamanho')
             genero_id = request.POST.get('genero')
+            arrecadador_id = request.POST.get('arrecadador_id')  # Adicionado para pegar o ID do arrecadador
             vestuario = Vestuario.objects.get(id=vestuario_id)
             tamanho = Tamanho.objects.get(id=tamanho_id)
             genero = Genero.objects.get(id=genero_id)
+            arrecadador = Arrecadador.objects.get(id=arrecadador_id)  # Captura o arrecadador
+
             Arrecadacao.objects.create(
                 vestuario=vestuario,
                 tamanho=tamanho,
                 genero=genero,
                 quantidade=quantidade,
+                arrecadador=arrecadador,  # Associa o arrecadador à doação
             )
 
         elif tipo == 'eletrodomestico':
@@ -36,7 +37,6 @@ def adicionar_doacao(request):
             alimento = Alimento.objects.get(id=alimento_id)
             Arrecadacao_alimento.objects.create(alimento=alimento, quantidade=quantidade)
 
-        # Retorna a quantidade como contexto para o JavaScript manipular
         return render(request, 'adicionar_doacao.html', {'quantidade': quantidade, 'doacao_realizada': True})
 
     context = {
@@ -45,8 +45,10 @@ def adicionar_doacao(request):
         'generos': Genero.objects.all(),
         'eletrodomesticos': Eletrodomestico.objects.all(),
         'alimentos': Alimento.objects.all(),
+        'arrecadores': Arrecadador.objects.all(),  # Certifique-se de que isso está presente
     }
     return render(request, 'adicionar_doacao.html', context)
+
 
 def soma_quantidade_arrecadacao(request):
     # Calcula a soma da quantidade de arrecadação
