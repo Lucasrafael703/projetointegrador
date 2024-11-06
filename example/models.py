@@ -82,7 +82,7 @@ class Arrecadacao(Base):
         verbose_name_plural = 'Arrecadações'
 
     def __str__(self):
-        return f'O arrecadador {self.arrecadador} arrecadou {self.quantidade} peças de {self.vestuario}'
+        return f'Arrecadado {self.quantidade} peças de {self.vestuario}'
 
 class Arrecadacao_eletrodomestico(Base):
     eletrodomestico = models.ForeignKey(Eletrodomestico, related_name='eletrodomestico', on_delete=models.CASCADE)
